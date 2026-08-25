@@ -1,0 +1,19 @@
+# Android Studio / Gradle build outputs
+app/**/build/
+app/.gradle/
+app/local.properties
+app/.idea/caches/
+app/.idea/libraries/
+app/.idea/workspace.xml
+app/.idea/navEditor.xml
+app/.idea/assetWizardSettings.xml
+*.iml
+.DS_Store
+.externalNativeBuild
+.cxx
+
+# Arduino build output from `arduino-cli compile --output-dir`
+build_out/
+
+# OS junk
+Thumbs.db
