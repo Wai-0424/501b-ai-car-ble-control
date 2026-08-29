@@ -7,7 +7,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40, Wire);
 #define SERVO_CH 0
 #define SERVO_MIN 205   // ~1000us -> 0 deg
 #define SERVO_MAX 410   // ~2000us -> 180 deg
-#define CENTER    130   // calibrated: 130 = actual mechanical center (not 90)
+#define CENTER    90    // re-calibrated: horn re-mounted at true center (2026-08-25)
 
 int angleToPulse(int angle) {
   angle = constrain(angle, 0, 180);
@@ -25,37 +25,37 @@ void setup() {
   pwm.begin();
   pwm.setPWMFreq(50);
   delay(10);
-  Serial.println("Centering at 130 deg first...");
+  Serial.println("Centering at 90 deg first...");
   setAngle(CENTER);
   delay(1500);
 }
 
 void loop() {
-  // CENTER -> -50, 5-deg steps, pausing each step so you can watch/listen
-  Serial.println("--- sweeping toward -50 ---");
-  for (int a = CENTER; a >= CENTER - 50; a -= 5) {
+  // CENTER -> -70, 5-deg steps, pausing each step so you can watch/listen
+  Serial.println("--- sweeping toward -70 ---");
+  for (int a = CENTER; a >= CENTER - 70; a -= 5) {
     setAngle(a);
     delay(500);
   }
   delay(1000);
 
   Serial.println("--- back to center ---");
-  for (int a = CENTER - 50; a <= CENTER; a += 5) {
+  for (int a = CENTER - 70; a <= CENTER; a += 5) {
     setAngle(a);
     delay(500);
   }
   delay(1000);
 
-  // CENTER -> +50 (note: +50 = 180 deg, the very edge of the pulse range)
-  Serial.println("--- sweeping toward +50 ---");
-  for (int a = CENTER; a <= CENTER + 50; a += 5) {
+  // CENTER -> +70
+  Serial.println("--- sweeping toward +70 ---");
+  for (int a = CENTER; a <= CENTER + 70; a += 5) {
     setAngle(a);
     delay(500);
   }
   delay(1000);
 
   Serial.println("--- back to center ---");
-  for (int a = CENTER + 50; a >= CENTER; a -= 5) {
+  for (int a = CENTER + 70; a >= CENTER; a -= 5) {
     setAngle(a);
     delay(500);
   }

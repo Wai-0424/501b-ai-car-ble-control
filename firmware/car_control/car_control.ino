@@ -12,8 +12,9 @@
   App sends this at a fixed ~20Hz rate the whole time it's connected (release = neutral 128/128),
   so the packet itself doubles as a link heartbeat; see the watchdog in loop() below.
 
-  Calibration (see CALIBRATION.md):
-    Servo mechanical center = 130 deg (not 90)
+  Calibration (see docs/CALIBRATION.md):
+    Servo mechanical center = 90 deg (horn re-mounted at true center, 2026-08-25;
+      old 130 deg value was calibrated against the previous horn position)
     IN1=PCA9685 CH1, IN2=PCA9685 CH2 (not CH2/CH3 - fixed 2026-08-20)
 **************************************************/
 #include <Wire.h>
@@ -32,8 +33,9 @@ BM7701_00_1 BC7701(&Serial3);
 #define SERVO_CH    0
 #define SERVO_MIN   205   // ~1000us -> 0 deg
 #define SERVO_MAX   410   // ~2000us -> 180 deg
-#define CENTER      130   // calibrated mechanical center (2026-08-20 test)
-#define STEER_OFFSET 30   // deg left/right of center; validated range during endpoint test
+#define CENTER      90    // horn re-mounted at true mechanical center (2026-08-25)
+#define STEER_OFFSET 70   // deg left/right of center; re-validated with servo_endpoint_test
+                           // against the new horn position, no binding up to +-70 (2026-08-25)
 
 // ---- Move packet protocol ----
 #define CMD_MOVE          'M'
